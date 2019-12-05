@@ -1,0 +1,1 @@
+export const GET_GEOLOCATION ='GET_GEOLOCATION'
