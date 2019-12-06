@@ -5,6 +5,7 @@ import { Input } from 'semantic-ui-react'
 import { Button , Grid, Label,Icon, Modal} from 'semantic-ui-react'
 import Maps from './maps'
 import GetGeoLocation from './getGeoLocation';
+import {storLocation} from '../Redux/geolocation/geoAction'
 const mapStateToProps =(state)=>{
     console.log(state)
     
@@ -29,12 +30,19 @@ export class messages extends Component {
             this.socket.emit('msg', {message: this.state.msg, user: this.props.phno,UName:this.props.Uname,date: new Date()});
          }
 
+
     }
     componentDidMount() {
         this.socket.on('newmsg', data=>{    
          this.setState((prevState)=>({msgs:[...(prevState.msgs),data]}))
          
          })
+         this.socket.on('maplocation', data=>{
+       
+            this.props.storLocation(data)
+
+           
+           })
     }
 
     
@@ -104,5 +112,10 @@ export class messages extends Component {
         )
     }
 }
+function mapDispatchToProps(dispatch){
+    return {
+        storLocation: data=>{dispatch(storLocation(data))}
+    }
+  }
 
-export default messages= connect(mapStateToProps)(messages)
+export default messages= connect(mapStateToProps,mapDispatchToProps)(messages)

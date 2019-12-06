@@ -5,4 +5,5 @@ export var  IntialState={
     active:'home',
     lat:'',
     long:'',
+    wholeLatAndLan:[]
 }

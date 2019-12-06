@@ -1,8 +1,15 @@
-import {GET_GEOLOCATION} from './geoTypes'
+import {GET_GEOLOCATION,STORE_LOCATION} from './geoTypes'
+
 export const getGeolocation =(data)=>{
     return{
         type:GET_GEOLOCATION,
         lat:data.lat,
-        lan:data.lan
+        lan:data.long
+    }
+}
+export const storLocation =(data)=>{
+    return{
+        type:STORE_LOCATION,
+        data:data
     }
 }
