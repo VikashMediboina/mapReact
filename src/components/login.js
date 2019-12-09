@@ -21,7 +21,7 @@ export class login extends Component {
     }
     submitPhoneNo= ()=>{
         const socket = socketIOClient('http://localhost:4000/');
-        socket.emit("setUsername",this.state.phoneNo)
+        socket.emit("setUsername",{phno:this.state.phoneNo,username:this.state.userName})
         this.props.logina(this.state)
        
     }

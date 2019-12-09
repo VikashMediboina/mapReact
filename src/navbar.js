@@ -7,6 +7,7 @@ import Home from './components/home';
 // import CakeComponents from './components/cakeComponents';
 import Login from './components/login';
 import Messages from './components/messages';
+import friends from './components/friends';
 const mapStateToProps =(state)=>{
   return {isLogedIn:state.loginReducer.isLogedIn,active:state.loginReducer.active,phno:state.loginReducer.phno}
 }
@@ -27,7 +28,7 @@ class navbar extends Component {
       this.redirect=<Redirect to={"/"} push></Redirect>
     }
     else{
-      this.redirect=<Redirect to={"/"+name} push></Redirect>
+      this.redirect=<Redirect to={"/"+name+"/"+"444"} push></Redirect>
     }
  
   
@@ -76,7 +77,9 @@ class navbar extends Component {
 
           <Route exact path="/" render={() => (<Redirect to="/home" />)} />
           <Route path="/home" component={Home} />    
-          <Route path="/messages/:phno" component={Messages} />
+          <Route path="/messages/:phno/:username" component={Messages} />
+          <Route path="/friends" component={friends} />
+
           <Route path="/login" component={Login}/>
         </Switch>
         {this.redirect}

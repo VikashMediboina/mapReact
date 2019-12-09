@@ -26,14 +26,15 @@ export class messages extends Component {
     sendMsg=()=>{
       
         if(this.state.msg) {
-            console.log(this.props)
-            this.socket.emit('msg', {message: this.state.msg, user: this.props.phno,UName:this.props.Uname,date: new Date()});
+            console.log(this.props.match.params.phno)
+            
+            this.socket.emit('msg', {message: this.state.msg, user: this.props.phno,UName:this.props.Uname,date: new Date(),oPhno:this.props.match.params.phno});
          }
 
 
     }
     componentDidMount() {
-        this.socket.on('newmsg', data=>{    
+        this.socket.on('newmsg'+this.props.phno+this.props.match.params.phno, data=>{    
          this.setState((prevState)=>({msgs:[...(prevState.msgs),data]}))
          
          })
@@ -50,7 +51,7 @@ export class messages extends Component {
         
         
         return (
-        <div><h1>{this.props.Uname}</h1>
+        <div><h1>{this.props.match.params.username}</h1>
            <h5>{this.state.msgs.map((msg)=>{return(<div key={msg.date} >
             {this.props.phno===msg.user
             ?
